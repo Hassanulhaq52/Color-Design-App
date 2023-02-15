@@ -16,67 +16,82 @@ class ModalBottomSheet extends StatelessWidget {
         final ColorDesignBloc colorDesignBloc = context.read<ColorDesignBloc>();
         return Container(
           padding: const EdgeInsets.only(top: 20),
-          height: double.infinity,
+          height: 330,
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextField(
-                  decoration: Constants.taskFieldDecoration.copyWith(
-
-                    hintText: 'Enter Color Name',
-
+                Container(
+                  decoration: Constants.containerDecoration,
+                  child: TextField(
+                    decoration: Constants.taskFieldDecoration.copyWith(
+                      hintText: 'Enter Color Name',
+                    ),
+                    onChanged: (value) {
+                      colorDesignBloc.add(OnAddColorName(colorName: value));
+                    },
                   ),
-                  onChanged: (value) {
-                    colorDesignBloc.add(OnAddColorName(colorName: value));
-                  },
                 ),
-                const SizedBox(height: 20,),
-                TextField(
-                  decoration: Constants.taskFieldDecoration.copyWith(
-
-                    hintText: 'Enter Color Notes',
-
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  height: 145,
+                  decoration: Constants.containerDecoration,
+                  child: TextField(
+                    decoration: Constants.taskFieldDecoration
+                        .copyWith(hintText: 'Enter Notes'),
+                    onChanged: (value) {
+                      colorDesignBloc.add(OnAddNotes(colorNotes: value));
+                    },
                   ),
-                  onChanged: (value) {
-                    colorDesignBloc.add(OnAddNotes(colorNotes: value));
-                  },
                 ),
-                Text('${state.colorNotes}'),
+                const SizedBox(
+                  height: 10,
+                ),
                 Text('${state.colorName}'),
-
-
+                Text('${state.colorNotes}'),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
                   child: ElevatedButton(
-                      onPressed: () {
-                        if (state.colorName != null &&
-                            state.colorName != '' &&
-                            state.colorNotes != null &&
-                            state.colorNotes != '') {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SavedColorsScreen(),
-                              ));
-                        } else {
-                          print('error');
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        primary: Colors.purple.shade400,
+                    onPressed: () {
+                      colorDesignBloc.add(OnPressedSave());
+
+                      if (state.colorName != null &&
+                          state.colorName != '' &&
+                          state.colorNotes != null &&
+                          state.colorNotes != '') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SavedColorsScreen(),
+                            ));
+                      } else {
+                        print('error');
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Text('Save')),
+                      primary: Colors.blueAccent,
+                    ),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),

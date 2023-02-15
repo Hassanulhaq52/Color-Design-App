@@ -8,6 +8,7 @@ class ColorDesignState {
     required this.slider4Value,
     required this.colorName,
     required this.colorNotes,
+    required this.colorDesignModel,
   });
 
   final double slider1Value;
@@ -16,6 +17,7 @@ class ColorDesignState {
   final double slider4Value;
   final String? colorName;
   final String? colorNotes;
+  List<ColorDesignModel> colorDesignModel;
 
   factory ColorDesignState.initial() {
     return ColorDesignState(
@@ -24,7 +26,7 @@ class ColorDesignState {
       slider3Value: 0.0,
       slider4Value: 0.0,
       colorName: '',
-      colorNotes: '',
+      colorNotes: '', colorDesignModel: [],
     );
   }
 
@@ -35,6 +37,7 @@ class ColorDesignState {
     double? slider4Value,
     String? colorName,
     String? colorNotes,
+    List<ColorDesignModel>? colorDesignModel,
   }) {
     return ColorDesignState(
       slider1Value: slider1Value ?? this.slider1Value,
@@ -42,7 +45,7 @@ class ColorDesignState {
       slider3Value: slider3Value ?? this.slider3Value,
       slider4Value: slider4Value ?? this.slider4Value,
       colorName: colorName ?? this.colorName,
-      colorNotes: colorNotes ?? this.colorNotes,
+      colorNotes: colorNotes ?? this.colorNotes, colorDesignModel: colorDesignModel ?? this.colorDesignModel,
     );
   }
 }

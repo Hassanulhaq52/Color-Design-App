@@ -6,26 +6,19 @@ class Constants {
     fontSize: 23,
   );
 
-  static InputDecoration taskFieldDecoration = InputDecoration(
-    fillColor: Colors.grey.shade200,
-    filled: true,
-    hintText: 'Enter Your Task',
-    contentPadding:
-        const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-    border: const OutlineInputBorder(
-      borderRadius: BorderRadius.all(Radius.circular(10.0)),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.grey.shade100,
-      ),
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderSide: BorderSide(
-        color: Colors.grey.shade100,
-      ),
-      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-    ),
+  static BoxDecoration containerDecoration = BoxDecoration(
+    color: Colors.grey.shade200,
+    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+  );
+
+  static const InputDecoration taskFieldDecoration =  InputDecoration(
+    hintText: 'Enter Your Notes',
+    contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
+    border: InputBorder.none,
+    hintStyle: TextStyle(color: Colors.black45),
+  );
+  static BoxDecoration addButtonDecoration = BoxDecoration(
+    color: Colors.purple.shade400,
+    shape: BoxShape.circle,
   );
 }
