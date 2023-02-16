@@ -13,11 +13,15 @@ class SavedColorsScreen extends StatelessWidget {
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.grey.shade400,
+          backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
-            backgroundColor: Colors.grey.shade400,
+            backgroundColor: Colors.grey.shade100,
             elevation: 0.0,
-            bottomOpacity: 0.0,
+            // bottomOpacity: 0.0,
+            title: const Text(
+              'Library',
+              style: Constants.headingStyle,
+            ),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -46,81 +50,108 @@ class SavedColorsScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: state.colorDesignModel.length,
             itemBuilder: (context, index) {
+              final Color rgbaColor = Color.fromRGBO(
+                state.colorDesignModel[index].red!.toInt(),
+                state.colorDesignModel[index].green!.toInt(),
+                state.colorDesignModel[index].blue!.toInt(),
+                state.colorDesignModel[index].opacity!,
+              );
+
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 70),
+                    padding: const EdgeInsets.only(bottom: 3),
                     child: SizedBox(
-                      height: 120,
+                      height: 90,
                       child: Card(
+                        color: Colors.grey.shade300,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         margin:
                             const EdgeInsets.only(left: 20, right: 20, top: 8),
-                        child: ListTile(
-                          leading: SizedBox(
-                            width: 45,
-                            height: 45,
-                            child: CircleAvatar(
-                              backgroundColor: Color.fromRGBO(
-                                state.slider1Value.toInt(),
-                                state.slider2Value.toInt(),
-                                state.slider3Value.toInt(),
-                                state.slider4Value,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 8, left: 3, right: 3),
+                          child: ListTile(
+                            leading: Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: SizedBox(
+                                width: 45,
+                                height: 45,
+                                child: CircleAvatar(
+                                  backgroundColor: Color.fromRGBO(
+                                    state.colorDesignModel[index].red!.toInt(),
+                                    state.colorDesignModel[index].green!
+                                        .toInt(),
+                                    state.colorDesignModel[index].blue!.toInt(),
+                                    state.colorDesignModel[index].opacity!,
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${state.colorName}',
-                                style: const TextStyle(
-                                    fontSize: 15, color: Colors.black),
-                              ),
-                              Text(
-                                '${state.colorNotes}',
-                                style: const TextStyle(
-                                    fontSize: 10, color: Colors.grey),
-                              ),
-                              // Text(
-                              //   '${snapshot.data![index].date} at ${snapshot.data![index].time}',
-                              //   style: const TextStyle(
-                              //       fontSize: 8.0, color: Colors.grey),
-                              // ),
-                            ],
-                          ),
-
-                          // subtitle: Text(account.description),
-                          trailing: SingleChildScrollView(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '${state.colorDesignModel[index].colorName}',
+                                  style: const TextStyle(
+                                      fontSize: 18, color: Colors.black),
+                                ),
+                                const SizedBox(
+                                  height: 1.0,
+                                ),
+                                Text(
+                                  '${state.colorDesignModel[index].colorNotes}',
+                                  style: const TextStyle(
+                                      fontSize: 14, color: Colors.black54),
+                                ),
+                                const SizedBox(
+                                  height: 6.0,
+                                ),
+                                Text(
+                                  '0XFF${rgbaColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                                  style: const TextStyle(
+                                    fontSize: 11.0,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            trailing: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'R: ${state.slider1Value.toInt()}',
+                                  'R: ${state.colorDesignModel[index].red!.toInt()}',
                                   style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  'G: ${state.slider2Value.toInt()}',
+                                  'G: ${state.colorDesignModel[index].green!.toInt()}',
                                   style: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 12.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  'B: ${state.slider3Value.toInt()}',
+                                  'B: ${state.colorDesignModel[index].blue!.toInt()}',
                                   style: const TextStyle(
+                                    color: Colors.grey,
                                     fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
                                   ),
                                 ),
                                 Text(
-                                  'A: ${state.slider4Value.toInt()}',
+                                  'A: ${state.colorDesignModel[index].opacity!.toStringAsFixed(1)}',
                                   style: const TextStyle(
+                                    color: Colors.grey,
                                     fontWeight: FontWeight.bold,
+                                    fontSize: 12.0,
                                   ),
                                 ),
                               ],

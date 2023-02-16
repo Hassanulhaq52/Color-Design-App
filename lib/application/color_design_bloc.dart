@@ -25,6 +25,46 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     on<OnAddNotes>((event, emit) {
       emit(state.copyWith(colorNotes: event.colorNotes));
     });
+    // on<OnPressedSave>((event, emit) {
+    //   state.copyWith(
+    //
+    //     colorDesignModel: state.colorDesignModel..add(ColorDesignModel(
+    //         colorName: state.colorName,
+    //         colorNotes: state.colorNotes,
+    //         red: state.slider1Value,
+    //         green: state.slider2Value,
+    //         blue: state.slider3Value,
+    //         opacity: state.slider4Value)));
+    //
+    //
+    //   // final List<ColorDesignModel> updatedList = [
+    //   //   ...state.colorDesignModel,
+    //   // ];
+    //   //
+    //   // updatedList.add(ColorDesignModel(
+    //   //     colorName: state.colorName,
+    //   //     colorNotes: state.colorNotes,
+    //   //     red: state.slider1Value,
+    //   //     green: state.slider2Value,
+    //   //     blue: state.slider3Value,
+    //   //     opacity: state.slider4Value));
+    //   //
+    //   // emit(
+    //   //   state.copyWith(
+    //   //     colorDesignModel: updatedList,
+    //   //     colorName: '',
+    //   //     colorNotes: '',
+    //   //     slider1Value: 0.0,
+    //   //     slider2Value: 0.0,
+    //   //     slider3Value: 0.0,
+    //   //     slider4Value: 0.0,
+    //   //   ),
+    //   // );
+    //
+    //
+    //
+    // });
+
     on<OnPressedSave>((event, emit) {
       emit(
         state.copyWith(
@@ -52,5 +92,21 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
             ),
       );
     });
+
+    // on<OnPressedSave>((event, emit) {
+    //   emit(state.copyWith(
+    //     colorDesignModel: [
+    //       ...state.colorDesignModel,
+    //       ColorDesignModel(
+    //         colorName: event.colorName,
+    //         colorNotes: event.colorNotes,
+    //         red: event.slider1Value,
+    //         green: event.slider2Value,
+    //         blue: event.slider3Value,
+    //         opacity: event.slider4Value,
+    //       ),
+    //     ],
+    //   ));
+    // });
   }
 }

@@ -38,8 +38,4 @@ class OnAddNotes extends ColorDesignEvent {
   final String colorNotes;
 }
 
-class OnPressedSave extends ColorDesignEvent{
-
-
-
-}
+class OnPressedSave extends ColorDesignEvent {}

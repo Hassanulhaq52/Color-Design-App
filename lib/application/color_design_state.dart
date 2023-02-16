@@ -26,7 +26,8 @@ class ColorDesignState {
       slider3Value: 0.0,
       slider4Value: 0.0,
       colorName: '',
-      colorNotes: '', colorDesignModel: [],
+      colorNotes: '',
+      colorDesignModel: [],
     );
   }
 
@@ -45,7 +46,8 @@ class ColorDesignState {
       slider3Value: slider3Value ?? this.slider3Value,
       slider4Value: slider4Value ?? this.slider4Value,
       colorName: colorName ?? this.colorName,
-      colorNotes: colorNotes ?? this.colorNotes, colorDesignModel: colorDesignModel ?? this.colorDesignModel,
+      colorNotes: colorNotes ?? this.colorNotes,
+      colorDesignModel: colorDesignModel ?? this.colorDesignModel,
     );
   }
 }
