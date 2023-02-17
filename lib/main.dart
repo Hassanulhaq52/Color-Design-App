@@ -1,4 +1,5 @@
 import 'package:color_design_app/application/color_design_bloc.dart';
+import 'package:color_design_app/model/color_design_model.dart';
 import 'package:color_design_app/screens/color_picker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

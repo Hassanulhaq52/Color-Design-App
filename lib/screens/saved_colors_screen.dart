@@ -1,15 +1,43 @@
+import 'dart:convert';
+
 import 'package:color_design_app/screens/color_picker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../application/color_design_bloc.dart';
 import '../constants/constants.dart';
+import '../model/color_design_model.dart';
 
 class SavedColorsScreen extends StatelessWidget {
   const SavedColorsScreen({Key? key}) : super(key: key);
 
+//   late List<ColorDesignModel> colorDesignModelList;
+//
+//   Future<void> _loadColorsFromSharedPreferences() async {
+//     final prefs = await SharedPreferences.getInstance();
+//     final encodedList = prefs.getString('colorDesignModel');
+//     if (encodedList != null) {
+//       final List<ColorDesignModel> savedList = (jsonDecode(encodedList) as List<dynamic>)
+//           .map((e) => ColorDesignModel.fromJson(e))
+//           .toList();
+//     } else {
+//       colorDesignModelList = [];
+//     }
+//   }
+//
+// // Method to save colorDesignModel list through shared preferences
+//   Future<void> saveColorDesignModel(
+//       List<ColorDesignModel> colorDesignModel) async {
+//     final SharedPreferences prefs = await SharedPreferences.getInstance();
+//     final List<String> encodedList = colorDesignModel.map((e) => json.encode(e.toJson())).toList();
+//     await prefs.setStringList('colorDesignModel', encodedList!);
+//   }
+
   @override
   Widget build(BuildContext context) {
+    final ColorDesignBloc colorDesignBloc =
+        BlocProvider.of<ColorDesignBloc>(context);
+    colorDesignBloc.loadColorsFromSharedPreferences();
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
       builder: (context, state) {
         return Scaffold(

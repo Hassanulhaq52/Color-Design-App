@@ -6,6 +6,7 @@ import 'package:color_design_app/widgets/slider_row.dart';
 import 'package:color_design_app/widgets/modal_bottom_sheet.dart';
 
 import '../constants/constants.dart';
+import '../model/color_design_model.dart';
 
 class ColorPickerScreen extends StatelessWidget {
   const ColorPickerScreen({Key? key}) : super(key: key);
@@ -20,7 +21,14 @@ class ColorPickerScreen extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               showModalBottomSheet(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(10),
+                    topLeft: Radius.circular(10),
+                  ),
+                ),
                 context: context,
+                isScrollControlled: true,
                 builder: (context) => const ModalBottomSheet(),
               );
             },
@@ -47,7 +55,7 @@ class ColorPickerScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SavedColorsScreen(),
+                          builder: (context) => SavedColorsScreen(),
                         ));
                   },
                   icon: const Icon(
