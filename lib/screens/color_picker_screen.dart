@@ -55,7 +55,7 @@ class ColorPickerScreen extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => SavedColorsScreen(),
+                          builder: (context) => const SavedColorsScreen(),
                         ));
                   },
                   icon: const Icon(

@@ -68,7 +68,7 @@ class ModalBottomSheet extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  SavedColorsScreen(),
+                            builder: (context) =>  const SavedColorsScreen(),
                           ));
                     } else {
                       print('error');
@@ -88,6 +88,7 @@ class ModalBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 9,),
             ],
           ),
         );

@@ -1,12 +1,8 @@
-import 'dart:convert';
-
 import 'package:color_design_app/screens/color_picker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../application/color_design_bloc.dart';
 import '../constants/constants.dart';
-import '../model/color_design_model.dart';
 
 class SavedColorsScreen extends StatelessWidget {
   const SavedColorsScreen({Key? key}) : super(key: key);
@@ -35,11 +31,9 @@ class SavedColorsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ColorDesignBloc colorDesignBloc =
-        BlocProvider.of<ColorDesignBloc>(context);
-    colorDesignBloc.loadColorsFromSharedPreferences();
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
       builder: (context, state) {
+        context.read<ColorDesignBloc>().loadColorsFromSharedPreferences();
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
           appBar: AppBar(
@@ -78,11 +72,11 @@ class SavedColorsScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: state.colorDesignModel.length,
             itemBuilder: (context, index) {
-              final Color rgbaColor = Color.fromRGBO(
+              final Color rgbaColor = Color.fromARGB(
+                state.colorDesignModel[index].opacity!.toInt(),
                 state.colorDesignModel[index].red!.toInt(),
                 state.colorDesignModel[index].green!.toInt(),
                 state.colorDesignModel[index].blue!.toInt(),
-                state.colorDesignModel[index].opacity!,
               );
 
               return Column(
