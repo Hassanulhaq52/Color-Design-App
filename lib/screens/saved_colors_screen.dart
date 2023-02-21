@@ -7,28 +7,6 @@ import '../constants/constants.dart';
 class SavedColorsScreen extends StatelessWidget {
   const SavedColorsScreen({Key? key}) : super(key: key);
 
-//   late List<ColorDesignModel> colorDesignModelList;
-//
-//   Future<void> _loadColorsFromSharedPreferences() async {
-//     final prefs = await SharedPreferences.getInstance();
-//     final encodedList = prefs.getString('colorDesignModel');
-//     if (encodedList != null) {
-//       final List<ColorDesignModel> savedList = (jsonDecode(encodedList) as List<dynamic>)
-//           .map((e) => ColorDesignModel.fromJson(e))
-//           .toList();
-//     } else {
-//       colorDesignModelList = [];
-//     }
-//   }
-//
-// // Method to save colorDesignModel list through shared preferences
-//   Future<void> saveColorDesignModel(
-//       List<ColorDesignModel> colorDesignModel) async {
-//     final SharedPreferences prefs = await SharedPreferences.getInstance();
-//     final List<String> encodedList = colorDesignModel.map((e) => json.encode(e.toJson())).toList();
-//     await prefs.setStringList('colorDesignModel', encodedList!);
-//   }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
@@ -72,12 +50,32 @@ class SavedColorsScreen extends StatelessWidget {
             scrollDirection: Axis.vertical,
             itemCount: state.colorDesignModel.length,
             itemBuilder: (context, index) {
-              final Color rgbaColor = Color.fromARGB(
-                state.colorDesignModel[index].opacity!.toInt(),
+              final Color rgbaColor = Color.fromRGBO(
                 state.colorDesignModel[index].red!.toInt(),
                 state.colorDesignModel[index].green!.toInt(),
                 state.colorDesignModel[index].blue!.toInt(),
+                state.colorDesignModel[index].opacity!,
               );
+
+              Widget buildHexCodeWidget() {
+                if (state.colorDesignModel[index].opacity! != 0.0) {
+                  return Text(
+                    '0XFF${rgbaColor.value.toRadixString(16).substring(2).toUpperCase()}',
+                    style: const TextStyle(
+                      fontSize: 11.0,
+                      color: Colors.grey,
+                    ),
+                  );
+                } else {
+                  return const Text(
+                    '0XFF000000',
+                    style: TextStyle(
+                      fontSize: 11.0,
+                      color: Colors.grey,
+                    ),
+                  );
+                }
+              }
 
               return Column(
                 children: [
@@ -102,13 +100,7 @@ class SavedColorsScreen extends StatelessWidget {
                                 width: 45,
                                 height: 45,
                                 child: CircleAvatar(
-                                  backgroundColor: Color.fromRGBO(
-                                    state.colorDesignModel[index].red!.toInt(),
-                                    state.colorDesignModel[index].green!
-                                        .toInt(),
-                                    state.colorDesignModel[index].blue!.toInt(),
-                                    state.colorDesignModel[index].opacity!,
-                                  ),
+                                  backgroundColor: rgbaColor,
                                 ),
                               ),
                             ),
@@ -132,13 +124,7 @@ class SavedColorsScreen extends StatelessWidget {
                                 const SizedBox(
                                   height: 6.0,
                                 ),
-                                Text(
-                                  '0XFF${rgbaColor.value.toRadixString(16).substring(2).toUpperCase()}',
-                                  style: const TextStyle(
-                                    fontSize: 11.0,
-                                    color: Colors.grey,
-                                  ),
-                                ),
+                                buildHexCodeWidget(),
                               ],
                             ),
                             trailing: Column(
@@ -146,35 +132,19 @@ class SavedColorsScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   'R: ${state.colorDesignModel[index].red!.toInt()}',
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Constants.colorStyle,
                                 ),
                                 Text(
                                   'G: ${state.colorDesignModel[index].green!.toInt()}',
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 12.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: Constants.colorStyle,
                                 ),
                                 Text(
                                   'B: ${state.colorDesignModel[index].blue!.toInt()}',
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0,
-                                  ),
+                                  style: Constants.colorStyle,
                                 ),
                                 Text(
                                   'A: ${state.colorDesignModel[index].opacity!.toStringAsFixed(1)}',
-                                  style: const TextStyle(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0,
-                                  ),
+                                  style: Constants.colorStyle,
                                 ),
                               ],
                             ),

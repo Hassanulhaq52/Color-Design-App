@@ -60,7 +60,6 @@ class ModalBottomSheet extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     colorDesignBloc.add(OnPressedSave());
-                    print(ColorDesignModel().colorNotes);
                     if (state.colorName != null &&
                         state.colorName != '' &&
                         state.colorNotes != null &&
@@ -88,7 +87,7 @@ class ModalBottomSheet extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 9,),
+              const SizedBox(height: 9,),
             ],
           ),
         );

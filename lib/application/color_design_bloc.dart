@@ -9,7 +9,6 @@ part 'color_design_event.dart';
 part 'color_design_state.dart';
 
 class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
-
   ColorDesignBloc() : super(ColorDesignState.initial()) {
     on<OnChangeValueSlider1>((event, emit) {
       emit(state.copyWith(slider1Value: event.slider1Value));
@@ -38,17 +37,19 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
         emit(
           state.copyWith(
             colorDesignModel: state.colorDesignModel
-              ..add(ColorDesignModel(
-                colorName: state.colorName!,
-                colorNotes: state.colorNotes!,
-                red: state.slider1Value,
-                green: state.slider2Value,
-                blue: state.slider3Value,
-                opacity: state.slider4Value,
-              ),),
+              ..add(
+                ColorDesignModel(
+                  colorName: state.colorName!,
+                  colorNotes: state.colorNotes!,
+                  red: state.slider1Value,
+                  green: state.slider2Value,
+                  blue: state.slider3Value,
+                  opacity: state.slider4Value,
+                ),
+              ),
           ),
         );
-        _saveColorsToSharedPreferences(state.colorDesignModel);
+        _saveColorsToSharedPreferences();
       } else {
         print('Plz fill all the Fields');
       }
@@ -59,7 +60,8 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     final prefs = await SharedPreferences.getInstance();
     final colorsJson = prefs.getString('colors');
     if (colorsJson != null) {
-      final colorsMapList = (jsonDecode(colorsJson) as List<dynamic>).map((colorMap) => ColorDesignModel.fromJson(colorMap))
+      final colorsMapList = (jsonDecode(colorsJson) as List<dynamic>)
+          .map((colorMap) => ColorDesignModel.fromJson(colorMap))
           .toList();
       emit(state.copyWith(colorDesignModel: colorsMapList));
     } else {
@@ -67,12 +69,10 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     }
   }
 
-  Future<void> _saveColorsToSharedPreferences(
-      List<ColorDesignModel> colorDesignModel) async {
+  Future<void> _saveColorsToSharedPreferences () async {
     final prefs = await SharedPreferences.getInstance();
     final encodedList =
-        jsonEncode(colorDesignModel.map((color) => color.toJson()).toList());
+        jsonEncode(state.colorDesignModel.map((color) => color.toJson()).toList());
     prefs.setString('colors', encodedList);
   }
 }
-
