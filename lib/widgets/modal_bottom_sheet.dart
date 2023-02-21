@@ -1,7 +1,7 @@
 import 'package:color_design_app/application/color_design_bloc.dart';
 import 'package:color_design_app/constants/constants.dart';
-import 'package:color_design_app/model/color_design_model.dart';
 import 'package:color_design_app/screens/saved_colors_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +29,7 @@ class ModalBottomSheet extends StatelessWidget {
               Container(
                 decoration: Constants.containerDecoration,
                 child: TextField(
-                  decoration: Constants.taskFieldDecoration.copyWith(
+                  decoration: Constants.colorFieldDecoration.copyWith(
                     hintText: 'Enter Color Name',
                   ),
                   onChanged: (value) {
@@ -41,10 +41,10 @@ class ModalBottomSheet extends StatelessWidget {
                 height: 10,
               ),
               Container(
-                height: 185,
+                height: 165,
                 decoration: Constants.containerDecoration,
                 child: TextField(
-                  decoration: Constants.taskFieldDecoration
+                  decoration: Constants.colorFieldDecoration
                       .copyWith(hintText: 'Enter Notes'),
                   onChanged: (value) {
                     colorDesignBloc.add(OnAddNotes(colorNotes: value));
@@ -64,10 +64,10 @@ class ModalBottomSheet extends StatelessWidget {
                         state.colorName != '' &&
                         state.colorNotes != null &&
                         state.colorNotes != '') {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>  const SavedColorsScreen(),
+                            builder: (context) => const SavedColorsScreen(),
                           ));
                     } else {
                       print('error');
@@ -77,17 +77,15 @@ class ModalBottomSheet extends StatelessWidget {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    primary: Colors.blueAccent,
+                    backgroundColor: CupertinoColors.activeBlue,
                   ),
                   child: const Text(
                     'Save',
-                    style: TextStyle(
-                      fontSize: 18,
-                    ),
+                    style: TextStyle(fontSize: 18),
                   ),
                 ),
               ),
-              const SizedBox(height: 9,),
+              const SizedBox(height: 15),
             ],
           ),
         );

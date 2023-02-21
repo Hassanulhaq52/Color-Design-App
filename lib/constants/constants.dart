@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
@@ -21,7 +22,7 @@ class Constants {
     borderRadius: const BorderRadius.all(Radius.circular(10.0)),
   );
 
-  static const InputDecoration taskFieldDecoration = InputDecoration(
+  static const InputDecoration colorFieldDecoration = InputDecoration(
     contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
     border: InputBorder.none,
     hintStyle: TextStyle(
@@ -29,8 +30,8 @@ class Constants {
     ),
   );
 
-  static BoxDecoration addButtonDecoration = BoxDecoration(
-    color: Colors.purple.shade400,
+  static BoxDecoration addButtonDecoration = const BoxDecoration(
+    color: CupertinoColors.systemPurple,
     shape: BoxShape.circle,
   );
 }

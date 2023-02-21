@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../model/color_design_model.dart';
 
 part 'color_design_event.dart';
+
 part 'color_design_state.dart';
 
 class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
@@ -13,6 +14,9 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     on<OnChangeValueSlider1>((event, emit) {
       emit(state.copyWith(slider1Value: event.slider1Value));
     });
+
+    on<OnLoadAtStart>((event, emit) => onLoadAtStart(event, emit));
+
     on<OnChangeValueSlider2>((event, emit) {
       emit(state.copyWith(slider2Value: event.slider2Value));
     });
@@ -28,6 +32,7 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     on<OnAddNotes>((event, emit) {
       emit(state.copyWith(colorNotes: event.colorNotes));
     });
+    add(OnLoadAtStart());
 
     on<OnPressedSave>((event, emit) {
       if (state.colorName != null &&
@@ -69,10 +74,15 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     }
   }
 
-  Future<void> _saveColorsToSharedPreferences () async {
+  Future<void> _saveColorsToSharedPreferences() async {
     final prefs = await SharedPreferences.getInstance();
-    final encodedList =
-        jsonEncode(state.colorDesignModel.map((color) => color.toJson()).toList());
+    final encodedList = jsonEncode(
+        state.colorDesignModel.map((color) => color.toJson()).toList());
     prefs.setString('colors', encodedList);
+    loadColorsFromSharedPreferences();
+  }
+
+  onLoadAtStart(OnLoadAtStart event, Emitter<ColorDesignState> emit) {
+    loadColorsFromSharedPreferences();
   }
 }
