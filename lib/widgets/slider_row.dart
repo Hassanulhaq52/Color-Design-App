@@ -21,15 +21,10 @@ class SliderRow extends StatelessWidget {
           Container(
             width: 30,
             height: 30,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: containerColor,
-            ),
+            decoration: BoxDecoration(shape: BoxShape.circle, color: containerColor),
           ),
           SliderTheme(
-            data: const SliderThemeData(
-              trackHeight: 10,
-            ),
+            data: const SliderThemeData(trackHeight: 10),
             child: SizedBox(
               width: 280,
               child: Slider(

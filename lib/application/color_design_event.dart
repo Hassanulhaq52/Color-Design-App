@@ -2,28 +2,28 @@ part of 'color_design_bloc.dart';
 
 abstract class ColorDesignEvent {}
 
-class OnChangeValueSlider1 extends ColorDesignEvent {
-  OnChangeValueSlider1({this.slider1Value});
+class OnChangeRedColorValue extends ColorDesignEvent {
+  OnChangeRedColorValue({required this.redColorValue});
 
-  final double? slider1Value;
+  final double redColorValue;
 }
 
-class OnChangeValueSlider2 extends ColorDesignEvent {
-  OnChangeValueSlider2({this.slider2Value});
+class OnChangeGreenColorValue extends ColorDesignEvent {
+  OnChangeGreenColorValue({required this.greenColorValue});
 
-  final double? slider2Value;
+  final double greenColorValue;
 }
 
-class OnChangeValueSlider3 extends ColorDesignEvent {
-  OnChangeValueSlider3({this.slider3Value});
+class OnChangeBlueColorValue extends ColorDesignEvent {
+  OnChangeBlueColorValue({required this.blueColorValue});
 
-  final double? slider3Value;
+  final double blueColorValue;
 }
 
-class OnChangeValueSlider4 extends ColorDesignEvent {
-  OnChangeValueSlider4({this.slider4Value});
+class OnChangeOpacityValue extends ColorDesignEvent {
+  OnChangeOpacityValue({required this.opacityValue});
 
-  final double? slider4Value;
+  final double opacityValue;
 }
 
 class OnAddColorName extends ColorDesignEvent {
@@ -39,4 +39,16 @@ class OnAddNotes extends ColorDesignEvent {
 }
 
 class OnPressedSave extends ColorDesignEvent {}
-class OnLoadAtStart extends ColorDesignEvent {}
+
+class OnLoadAtStart extends ColorDesignEvent {
+  //
+  // OnLoadAtStart({required this.onLoadColors});
+  // final List<dynamic> onLoadColors;
+
+}
+
+class OnLoadColors extends ColorDesignEvent {
+
+
+
+}

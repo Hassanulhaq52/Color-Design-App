@@ -1,19 +1,19 @@
 class ColorDesignModel {
   ColorDesignModel({
-    this.colorName,
-    this.colorNotes,
-    this.red,
-    this.green,
-    this.blue,
-    this.opacity,
+    required this.colorName,
+    required this.colorNotes,
+    required this.red,
+    required this.green,
+    required this.blue,
+    required this.opacity,
   });
 
-  final String? colorName;
-  final String? colorNotes;
-  final double? red;
-  final double? green;
-  final double? blue;
-  final double? opacity;
+  final String colorName;
+  final String colorNotes;
+  final double red;
+  final double green;
+  final double blue;
+  final double opacity;
 
   factory ColorDesignModel.fromJson(Map<String, dynamic> json) =>
       ColorDesignModel(

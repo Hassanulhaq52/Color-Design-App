@@ -1,9 +1,8 @@
 import 'package:color_design_app/screens/color_picker_screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../application/color_design_bloc.dart';
-import '../constants/constants.dart';
+import '../utils/styles.dart';
 
 class SavedColorsScreen extends StatelessWidget {
   const SavedColorsScreen({Key? key}) : super(key: key);
@@ -26,17 +25,14 @@ class SavedColorsScreen extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: Colors.grey.shade100,
               elevation: 0.0,
-              title: const Text(
-                'Library',
-                style: Constants.headingStyle,
-              ),
+              title: const Text('Library', style: Styles.headingStyle),
               actions: [
                 Padding(
                   padding: const EdgeInsets.only(right: 20),
                   child: Container(
                     height: 30,
                     width: 40,
-                    decoration: Constants.addButtonDecoration,
+                    decoration: Styles.addButtonDecoration,
                     child: IconButton(
                       onPressed: () {
                         Navigator.pushReplacement(
@@ -58,20 +54,20 @@ class SavedColorsScreen extends StatelessWidget {
                 final colorData = state.colorDesignModel[index];
 
                 final Color rgbaColor = Color.fromRGBO(
-                  colorData.red!.toInt(),
-                  colorData.green!.toInt(),
-                  colorData.blue!.toInt(),
-                  colorData.opacity!,
+                  colorData.red.toInt(),
+                  colorData.green.toInt(),
+                  colorData.blue.toInt(),
+                  colorData.opacity,
                 );
 
                 return Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
+                      padding: const EdgeInsets.only(bottom: 7),
                       child: SizedBox(
                         height: 100,
                         child: Card(
-                          color: CupertinoColors.systemGrey5,
+                          color: Colors.grey.shade300,
                           elevation: 10.0,
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -81,7 +77,7 @@ class SavedColorsScreen extends StatelessWidget {
                             padding: const EdgeInsets.only(bottom: 8, left: 3, right: 3),
                             child: ListTile(
                               leading: Padding(
-                                padding: const EdgeInsets.only(top: 4),
+                                padding: const EdgeInsets.only(top: 7),
                                 child: SizedBox(
                                   width: 45,
                                   height: 45,
@@ -93,36 +89,28 @@ class SavedColorsScreen extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    '${colorData.colorName}',
-                                    style: const TextStyle(fontSize: 18, color: Colors.black),
+                                    colorData.colorName,
+                                    style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey.shade800),
                                   ),
-                                  const SizedBox(height: 1.0),
+                                  const SizedBox(height: 2.0),
                                   Text(
-                                    '${colorData.colorNotes}',
-                                    style: const TextStyle(fontSize: 14, color: Colors.black54),
+                                    colorData.colorNotes,
+                                    style: const TextStyle(fontSize: 13, color: Colors.black54),
                                   ),
-                                  const SizedBox(height: 6.0),
+                                  const SizedBox(height: 5.0),
                                   Text(
-                                    colorData.opacity! != 0.0
-                                        ? '0XFF${rgbaColor.value.toRadixString(16).substring(2).toUpperCase()}'
-                                        : '0XFF000000',
-                                    style: const TextStyle(fontSize: 11.0, color: Colors.grey),
-                                  )
+                                    '0x${rgbaColor.value.toRadixString(16).toUpperCase()}',
+                                    style: const TextStyle(fontSize: 10.0, color: Colors.grey),
+                                  ),
                                 ],
                               ),
                               trailing: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('R: ${colorData.red!.toInt()}', style: Constants.colorStyle),
-                                  Text('G: ${colorData.green!.toInt()}', style: Constants.colorStyle),
-                                  Text(
-                                    'B: ${colorData.blue!.toInt()}',
-                                    style: Constants.colorStyle,
-                                  ),
-                                  Text(
-                                    'A: ${colorData.opacity!.toStringAsFixed(1)}',
-                                    style: Constants.colorStyle,
-                                  ),
+                                  Text('R: ${colorData.red.toInt()}', style: Styles.colorStyle),
+                                  Text('G: ${colorData.green.toInt()}', style: Styles.colorStyle),
+                                  Text('B: ${colorData.blue.toInt()}', style: Styles.colorStyle),
+                                  Text('A: ${colorData.opacity.toStringAsFixed(1)}', style: Styles.colorStyle),
                                 ],
                               ),
                             ),

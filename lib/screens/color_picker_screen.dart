@@ -1,11 +1,10 @@
 import 'package:color_design_app/application/color_design_bloc.dart';
 import 'package:color_design_app/screens/saved_colors_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:color_design_app/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:color_design_app/widgets/slider_row.dart';
 import 'package:color_design_app/widgets/modal_bottom_sheet.dart';
-import '../constants/constants.dart';
 import 'package:color_design_app/widgets/description_text.dart';
 
 class ColorPickerScreen extends StatelessWidget {
@@ -20,7 +19,7 @@ class ColorPickerScreen extends StatelessWidget {
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
           floatingActionButton: FloatingActionButton(
-            backgroundColor: CupertinoColors.activeBlue,
+            backgroundColor: Colors.blueAccent,
             onPressed: () {
               showModalBottomSheet(
                 shape: const RoundedRectangleBorder(
@@ -37,7 +36,7 @@ class ColorPickerScreen extends StatelessWidget {
             backgroundColor: Colors.white12,
             elevation: 0.0,
             title: const Center(
-              child: Text('Color Designer', style: Constants.headingStyle),
+              child: Text('Color Designer', style: Styles.headingStyle),
             ),
             actions: [
               Padding(
@@ -67,49 +66,46 @@ class ColorPickerScreen extends StatelessWidget {
                     height: 180,
                     decoration: BoxDecoration(
                       color: Color.fromRGBO(
-                        state.slider1Value.toInt(),
-                        state.slider2Value.toInt(),
-                        state.slider3Value.toInt(),
-                        state.slider4Value,
+                        state.redColorValue.toInt(),
+                        state.greenColorValue.toInt(),
+                        state.blueColorValue.toInt(),
+                        state.opacityValue,
                       ),
                       shape: BoxShape.circle,
                     ),
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(
-                  '- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -',
-                  style: Constants.descriptionStyle.copyWith(fontSize: 21),
-                ),
+                Text('- ' * 33, style: Styles.descriptionStyle.copyWith(fontSize: 21)),
+
+
                 const SizedBox(height: 8),
-                const DescriptionText(
-                    text:
-                        'You can Customize the following sliders to View the changes render on the color palette above.'),
+
                 const SizedBox(height: 15),
                 const DescriptionText(text: 'You can use the save button to save your designed color.'),
                 const SizedBox(height: 20),
                 SliderRow(
                   containerColor: Colors.red,
                   onChanged: (value) {
-                    colorDesignBloc.add(OnChangeValueSlider1(slider1Value: value));
+                    colorDesignBloc.add(OnChangeRedColorValue(redColorValue: value));
                   },
-                  value: state.slider1Value,
+                  value: state.redColorValue,
                 ),
                 const SizedBox(height: 10),
                 SliderRow(
-                  containerColor: CupertinoColors.systemGreen,
+                  containerColor: Colors.green,
                   onChanged: (value) {
-                    colorDesignBloc.add(OnChangeValueSlider2(slider2Value: value));
+                    colorDesignBloc.add(OnChangeGreenColorValue(greenColorValue: value));
                   },
-                  value: state.slider2Value,
+                  value: state.greenColorValue,
                 ),
                 const SizedBox(height: 10),
                 SliderRow(
-                  containerColor: CupertinoColors.activeBlue,
+                  containerColor: Colors.blueAccent,
                   onChanged: (value) {
-                    colorDesignBloc.add(OnChangeValueSlider3(slider3Value: value));
+                    colorDesignBloc.add(OnChangeBlueColorValue(blueColorValue: value));
                   },
-                  value: state.slider3Value,
+                  value: state.blueColorValue,
                 ),
                 const SizedBox(height: 10),
                 Padding(
@@ -125,9 +121,7 @@ class ColorPickerScreen extends StatelessWidget {
                         ),
                       ),
                       SliderTheme(
-                        data: const SliderThemeData(
-                          trackHeight: 10,
-                        ),
+                        data: const SliderThemeData(trackHeight: 10),
                         child: SizedBox(
                           width: 280,
                           child: Slider(
@@ -136,9 +130,9 @@ class ColorPickerScreen extends StatelessWidget {
                             activeColor: Colors.grey.shade400,
                             inactiveColor: Colors.grey.shade200,
                             thumbColor: Colors.grey.shade300,
-                            value: state.slider4Value,
+                            value: state.opacityValue,
                             onChanged: (value) {
-                              colorDesignBloc.add(OnChangeValueSlider4(slider4Value: value));
+                              colorDesignBloc.add(OnChangeOpacityValue(opacityValue: value));
                             },
                           ),
                         ),

@@ -1,7 +1,15 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Constants {
+class Styles {
+  static TextStyle descriptionStyle = TextStyle(
+    color: Colors.grey.shade500,
+  );
+
+  static BoxDecoration containerDecoration = BoxDecoration(
+    color: Colors.grey.shade300,
+    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+  );
+
   static const TextStyle headingStyle = TextStyle(
     color: Colors.black,
     fontSize: 23,
@@ -13,15 +21,6 @@ class Constants {
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle descriptionStyle = TextStyle(
-    color: Colors.grey.shade500,
-  );
-
-  static BoxDecoration containerDecoration = BoxDecoration(
-    color: Colors.grey.shade300,
-    borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-  );
-
   static const InputDecoration colorFieldDecoration = InputDecoration(
     contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
     border: InputBorder.none,
@@ -30,8 +29,8 @@ class Constants {
     ),
   );
 
-  static BoxDecoration addButtonDecoration = const BoxDecoration(
-    color: CupertinoColors.systemPurple,
+  static const BoxDecoration addButtonDecoration = BoxDecoration(
+    color: Colors.purple,
     shape: BoxShape.circle,
   );
 }
