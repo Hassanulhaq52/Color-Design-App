@@ -40,15 +40,4 @@ class OnAddNotes extends ColorDesignEvent {
 
 class OnPressedSave extends ColorDesignEvent {}
 
-class OnLoadAtStart extends ColorDesignEvent {
-  //
-  // OnLoadAtStart({required this.onLoadColors});
-  // final List<dynamic> onLoadColors;
-
-}
-
-class OnLoadColors extends ColorDesignEvent {
-
-
-
-}
+class OnLoadAtStart extends ColorDesignEvent {}

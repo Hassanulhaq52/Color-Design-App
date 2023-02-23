@@ -15,6 +15,12 @@ class ColorPickerScreen extends StatelessWidget {
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
       builder: (context, state) {
         final ColorDesignBloc colorDesignBloc = context.read<ColorDesignBloc>();
+        final Color rgbaColor = Color.fromRGBO(
+          state.redColorValue.toInt(),
+          state.greenColorValue.toInt(),
+          state.blueColorValue.toInt(),
+          state.opacityValue,
+        );
 
         return Scaffold(
           backgroundColor: Colors.grey.shade100,
@@ -78,10 +84,84 @@ class ColorPickerScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 Text('- ' * 33, style: Styles.descriptionStyle.copyWith(fontSize: 21)),
 
+                // CustomPaint(painter: LineDashedPainter()),
+                // CustomPaint(
+                //   painter: LineDashedPainter(
+                //     dashWidth: 13,
+                //     dashSpace: 8,
+                //     numDashes: 20,
+                //     color: Colors.grey.shade400,
+                //   ),
+                //   size: Size(double.infinity, 2),
+                // ),
 
-                const SizedBox(height: 8),
+                // ListView.builder(
+                //
+                //     itemCount: 10,
+                //     itemBuilder: (context, index){
+                //
+                //   return  Row(
+                //     children: [
+                //       Divider(
+                //         indent: 6,
+                //         endIndent: 10,
+                //         height: 5,
+                //         color: Colors.grey,
+                //         thickness: 2,
+                //       ),
+                //     ],
+                //   );
+                //
+                // }),
+                // for(int i =0; i<20; i++){
+                //   Divider(
+                //     indent: 6,
+                //     endIndent: 10,
+                //     height: 5,
+                //     color: Colors.grey,
+                //     thickness: 2,
+                //   ),
+                // }
+                //
+                //  Divider(
+                //   indent: 6,
+                //   endIndent: 10,
+                //   height: 5,
+                //   color: Colors.grey,
+                //   thickness: 2,
+                // ),
 
-                const SizedBox(height: 15),
+                // Divider(
+                //   child: CustomPaint(
+                //     painter: LineDashedPainter(
+                //       dashWidth: 5,
+                //       dashSpace: 5,
+                //       color: Colors.grey,
+                //       numDashes: 20,
+                //     ),
+                //   ),
+                // ),
+
+                // Container(
+                //   width: 200,
+                //   height: 2,
+                //   decoration: BoxDecoration(
+                //     border: Border(
+                //       bottom: BorderSide(
+                //         width: 2,
+                //         color: Colors.grey,
+                //         style: BorderStyle.solid
+                //       ),
+                //     ),
+                //   ),
+                // ),
+
+                const SizedBox(height: 10),
+                const DescriptionText(
+                    text:
+                        'You can customize the following sliders to view the changes render on the color palette above'),
+                const SizedBox(height: 10),
+
                 const DescriptionText(text: 'You can use the save button to save your designed color.'),
                 const SizedBox(height: 20),
                 SliderRow(

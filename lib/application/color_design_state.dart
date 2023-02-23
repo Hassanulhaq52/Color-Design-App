@@ -21,10 +21,10 @@ class ColorDesignState {
 
   factory ColorDesignState.initial() {
     return ColorDesignState(
-      redColorValue: 0.0,
-      greenColorValue: 0.0,
-      blueColorValue: 0.0,
-      opacityValue: 0.0,
+      redColorValue: 100.0,
+      greenColorValue: 100.0,
+      blueColorValue: 100.0,
+      opacityValue: 0.2,
       colorName: '',
       colorNotes: '',
       colorDesignModel: [],
