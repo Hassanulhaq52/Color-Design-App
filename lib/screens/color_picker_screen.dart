@@ -71,12 +71,7 @@ class ColorPickerScreen extends StatelessWidget {
                     width: 180,
                     height: 180,
                     decoration: BoxDecoration(
-                      color: Color.fromRGBO(
-                        state.redColorValue.toInt(),
-                        state.greenColorValue.toInt(),
-                        state.blueColorValue.toInt(),
-                        state.opacityValue,
-                      ),
+                      color: rgbaColor,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -165,27 +160,27 @@ class ColorPickerScreen extends StatelessWidget {
                 const DescriptionText(text: 'You can use the save button to save your designed color.'),
                 const SizedBox(height: 20),
                 SliderRow(
-                  containerColor: Colors.red,
+                  containerColor: Colors.redAccent.shade400,
                   onChanged: (value) {
                     colorDesignBloc.add(OnChangeRedColorValue(redColorValue: value));
                   },
-                  value: state.redColorValue,
+                  sliderValue: state.redColorValue,
                 ),
                 const SizedBox(height: 10),
                 SliderRow(
-                  containerColor: Colors.green,
+                  containerColor: Colors.lightGreenAccent.shade700,
                   onChanged: (value) {
                     colorDesignBloc.add(OnChangeGreenColorValue(greenColorValue: value));
                   },
-                  value: state.greenColorValue,
+                  sliderValue: state.greenColorValue,
                 ),
                 const SizedBox(height: 10),
                 SliderRow(
-                  containerColor: Colors.blueAccent,
+                  containerColor: Colors.blueAccent.shade700,
                   onChanged: (value) {
                     colorDesignBloc.add(OnChangeBlueColorValue(blueColorValue: value));
                   },
-                  value: state.blueColorValue,
+                  sliderValue: state.blueColorValue,
                 ),
                 const SizedBox(height: 10),
                 Padding(

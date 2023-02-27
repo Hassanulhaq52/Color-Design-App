@@ -5,12 +5,12 @@ class SliderRow extends StatelessWidget {
     super.key,
     required this.containerColor,
     required this.onChanged,
-    required this.value,
+    required this.sliderValue,
   });
 
   final void Function(double)? onChanged;
   final Color containerColor;
-  final double value;
+  final double sliderValue;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class SliderRow extends StatelessWidget {
                 activeColor: containerColor,
                 inactiveColor: Colors.grey.shade200,
                 thumbColor: Colors.grey.shade300,
-                value: value,
+                value: sliderValue,
                 onChanged: onChanged,
               ),
             ),

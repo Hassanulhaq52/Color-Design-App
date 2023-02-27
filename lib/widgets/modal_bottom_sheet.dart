@@ -1,4 +1,5 @@
 import 'package:color_design_app/application/color_design_bloc.dart';
+import 'package:color_design_app/application/saved_color_bloc/saved_color_bloc.dart';
 import 'package:color_design_app/screens/saved_colors_screen.dart';
 import 'package:color_design_app/utils/styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,21 +52,24 @@ class ModalBottomSheet extends StatelessWidget {
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
+                    // SavedColorBloc.add(OnPressedSave());
                     colorDesignBloc.add(OnPressedSave());
-                    if (state.colorName != '' &&
-                        state.colorNotes != '') {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SavedColorsScreen(),
-                        ),
-                      );
-                    } else {
-                      print('error');
-                    }
+                    Navigator.pop(context);
+                    // if (state.colorName != '' && state.colorNotes != '') {
+                    //   Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //       builder: (context) => const SavedColorsScreen(),
+                    //     ),
+                    //   );
+                    // } else {
+                    //   print('error');
+                    // }
                   },
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     backgroundColor: CupertinoColors.activeBlue,
                   ),
                   child: const Text(
