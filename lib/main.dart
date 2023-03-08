@@ -1,9 +1,10 @@
-import 'package:color_design_app/application/color_design_bloc.dart';
-import 'package:color_design_app/application/saved_color_bloc/saved_color_bloc.dart';
-import 'package:color_design_app/model/color_design_model.dart';
+
 import 'package:color_design_app/screens/color_picker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'application/color_picker_bloc/color_design_bloc.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-
-        BlocProvider(create: (context) => ColorDesignBloc(),
-
+    return BlocProvider(
+      create: (context) => ColorDesignBloc(),
       child: const MaterialApp(
         title: 'Color Design App',
         home: ColorPickerScreen(),

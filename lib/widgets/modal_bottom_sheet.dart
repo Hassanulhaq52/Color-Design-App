@@ -1,10 +1,8 @@
-import 'package:color_design_app/application/color_design_bloc.dart';
-import 'package:color_design_app/application/saved_color_bloc/saved_color_bloc.dart';
-import 'package:color_design_app/screens/saved_colors_screen.dart';
 import 'package:color_design_app/utils/styles.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../application/color_picker_bloc/color_design_bloc.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   const ModalBottomSheet({
@@ -31,9 +29,7 @@ class ModalBottomSheet extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               Container(
                 height: 160,
                 decoration: Styles.containerDecoration,
@@ -44,38 +40,32 @@ class ModalBottomSheet extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
                 height: 45,
                 child: ElevatedButton(
                   onPressed: () {
-                    // SavedColorBloc.add(OnPressedSave());
                     colorDesignBloc.add(OnPressedSave());
                     Navigator.pop(context);
-                    // if (state.colorName != '' && state.colorNotes != '') {
-                    //   Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //       builder: (context) => const SavedColorsScreen(),
-                    //     ),
-                    //   );
-                    // } else {
-                    //   print('error');
-                    // }
+
+                    if (state.colorName != '' && state.colorNotes != '') {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Center(child: Text('${state.colorName} Color is Added to Color\'s Library')),
+                        backgroundColor: Colors.green,
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Center(child: Text('Please Fill all the Fields')),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
                   },
                   style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    backgroundColor: CupertinoColors.activeBlue,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: Colors.blueAccent,
                   ),
-                  child: const Text(
-                    'Save',
-                    style: TextStyle(fontSize: 18),
-                  ),
+                  child: const Text('Save', style: TextStyle(fontSize: 18)),
                 ),
               ),
               const SizedBox(height: 15),

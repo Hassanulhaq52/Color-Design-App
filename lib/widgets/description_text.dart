@@ -10,10 +10,7 @@ class DescriptionText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Text(
-        text,
-        style: Styles.descriptionStyle,
-      ),
+      child: Text(text, style: Styles.descriptionStyle),
     );
   }
 }

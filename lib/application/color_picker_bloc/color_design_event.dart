@@ -1,3 +1,4 @@
+
 part of 'color_design_bloc.dart';
 
 abstract class ColorDesignEvent {}
@@ -40,4 +41,8 @@ class OnAddNotes extends ColorDesignEvent {
 
 class OnPressedSave extends ColorDesignEvent {}
 
-// class OnLoadAtStart extends ColorDesignEvent {}
+class OnRemoveColor extends ColorDesignEvent {
+  OnRemoveColor({required this.index});
+
+  final int index;
+}

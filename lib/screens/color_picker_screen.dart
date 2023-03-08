@@ -1,4 +1,3 @@
-import 'package:color_design_app/application/color_design_bloc.dart';
 import 'package:color_design_app/screens/saved_colors_screen.dart';
 import 'package:color_design_app/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:color_design_app/widgets/slider_row.dart';
 import 'package:color_design_app/widgets/modal_bottom_sheet.dart';
 import 'package:color_design_app/widgets/description_text.dart';
+
+import '../application/color_picker_bloc/color_design_bloc.dart';
 
 class ColorPickerScreen extends StatelessWidget {
   const ColorPickerScreen({Key? key}) : super(key: key);
@@ -40,10 +41,9 @@ class ColorPickerScreen extends StatelessWidget {
           ),
           appBar: AppBar(
             backgroundColor: Colors.white12,
+            centerTitle: true,
             elevation: 0.0,
-            title: const Center(
-              child: Text('Color Designer', style: Styles.headingStyle),
-            ),
+            title: const Text('Color Designer', style: Styles.headingStyle),
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 15),
@@ -154,7 +154,7 @@ class ColorPickerScreen extends StatelessWidget {
                 const SizedBox(height: 10),
                 const DescriptionText(
                     text:
-                        'You can customize the following sliders to view the changes render on the color palette above'),
+                        'You can customize the following sliders to view the changes render on the color palette above.'),
                 const SizedBox(height: 10),
 
                 const DescriptionText(text: 'You can use the save button to save your designed color.'),
@@ -188,17 +188,17 @@ class ColorPickerScreen extends StatelessWidget {
                   child: Row(
                     children: [
                       Container(
-                        width: 30,
-                        height: 30,
+                        width: 33,
+                        height: 33,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           gradient: LinearGradient(colors: [Colors.white10, Colors.grey.shade800]),
                         ),
                       ),
                       SliderTheme(
-                        data: const SliderThemeData(trackHeight: 10),
+                        data: const SliderThemeData(trackHeight: 9),
                         child: SizedBox(
-                          width: 280,
+                          width: 276,
                           child: Slider(
                             max: 1.0,
                             min: 0.0,

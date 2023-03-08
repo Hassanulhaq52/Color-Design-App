@@ -24,9 +24,7 @@ class Styles {
   static const InputDecoration colorFieldDecoration = InputDecoration(
     contentPadding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 20.0),
     border: InputBorder.none,
-    hintStyle: TextStyle(
-      color: Colors.black45,
-    ),
+    hintStyle: TextStyle(color: Colors.black38),
   );
 
   static const BoxDecoration addButtonDecoration = BoxDecoration(

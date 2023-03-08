@@ -8,7 +8,6 @@ class ColorDesignState {
     required this.opacityValue,
     required this.colorName,
     required this.colorNotes,
-    required this.colorDesignModel,
   });
 
   final double redColorValue;
@@ -17,7 +16,6 @@ class ColorDesignState {
   final double opacityValue;
   final String colorName;
   final String colorNotes;
-  List<ColorDesignModel> colorDesignModel;
 
   factory ColorDesignState.initial() {
     return ColorDesignState(
@@ -27,7 +25,6 @@ class ColorDesignState {
       opacityValue: 0.2,
       colorName: '',
       colorNotes: '',
-      colorDesignModel: [],
     );
   }
 
@@ -38,7 +35,6 @@ class ColorDesignState {
     double? opacityValue,
     String? colorName,
     String? colorNotes,
-    List<ColorDesignModel>? colorDesignModel,
   }) {
     return ColorDesignState(
       redColorValue: redColorValue ?? this.redColorValue,
@@ -47,7 +43,6 @@ class ColorDesignState {
       opacityValue: opacityValue ?? this.opacityValue,
       colorName: colorName ?? this.colorName,
       colorNotes: colorNotes ?? this.colorNotes,
-      colorDesignModel: colorDesignModel ?? this.colorDesignModel,
     );
   }
 }
