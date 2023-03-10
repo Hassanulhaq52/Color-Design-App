@@ -49,17 +49,15 @@ class ModalBottomSheet extends StatelessWidget {
                     colorDesignBloc.add(OnPressedSave());
                     Navigator.pop(context);
 
-                    if (state.colorName != '' && state.colorNotes != '') {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Center(child: Text('${state.colorName} Color is Added to Color\'s Library')),
-                        backgroundColor: Colors.green,
-                      ));
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Center(child: Text('Please Fill all the Fields')),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
+                    state.colorName != '' && state.colorNotes != ''
+                        ? ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Center(child: Text('${state.colorName} Color is Added to Color\'s Library')),
+                            backgroundColor: Colors.green,
+                          ))
+                        : ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Center(child: Text('Please Fill all the Fields')),
+                            backgroundColor: Colors.red,
+                          ));
                   },
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

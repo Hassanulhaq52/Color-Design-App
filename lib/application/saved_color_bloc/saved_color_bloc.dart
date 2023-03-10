@@ -1,12 +1,70 @@
-import 'dart:convert';
+//
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 import '../../model/color_design_model.dart';
-
+import 'package:path/path.dart';
 part 'saved_color_event.dart';
-
+//
 part 'saved_color_state.dart';
+//
+// class SavedColorBloc extends Bloc<SavedColorEvent, SavedColorState> {
+//   SavedColorBloc() : super(SavedColorState.initial()) {
+//     on<OnLoadAtStart>((event, emit) async {
+//       final colorsList = await loadColorsFromSharedPreferences();
+//       emit(state.copyWith(colorsList));
+//     });
+//
+//
+//
+//     add(OnLoadAtStart());
+//   }
+//
+//   // Future<List<ColorDesignModel>> loadColorsFromSharedPreferences() async {
+//   //   final prefs = await SharedPreferences.getInstance();
+//   //   final colorsJson = prefs.getString('colors');
+//   //   if (colorsJson != null) {
+//   //     final colorsMapList =
+//   //         (jsonDecode(colorsJson) as List<dynamic>).map((colorMap) => ColorDesignModel.fromJson(colorMap)).toList();
+//   //     return colorsMapList;
+//   //   } else {
+//   //     return [];
+//   //   }
+//   // }
+//
+//   Future<Database> _initDatabase() async {
+//     final databasesPath = await getDatabasesPath();
+//     final path = join(databasesPath, 'color_design_app.db');
+//
+//     return await openDatabase(
+//       path,
+//       version: 1,
+//       onCreate: (db, version) async {
+//         await db.execute('''
+//         CREATE TABLE colors(
+//           id INTEGER PRIMARY KEY AUTOINCREMENT,
+//           colorName TEXT,
+//           colorNotes TEXT,
+//           red REAL,
+//           green REAL,
+//           blue REAL,
+//           opacity REAL
+//         )
+//         ''');
+//       },
+//     );
+//   }
+//
+//
+//   Future<List<ColorDesignModel>> loadColorsFromSharedPreferences() async {
+//     final db = await _initDatabase();
+//     final result = await db.query('colors');
+//     return List.generate(result.length, (index) => ColorDesignModel.fromJson(result[index]));
+//   }
+//
+// }
+
+
 
 class SavedColorBloc extends Bloc<SavedColorEvent, SavedColorState> {
   SavedColorBloc() : super(SavedColorState.initial()) {
@@ -15,18 +73,46 @@ class SavedColorBloc extends Bloc<SavedColorEvent, SavedColorState> {
       emit(state.copyWith(colorsList));
     });
 
+    // on<OnColorDeleted>((event, emit) {
+    //   final updatedColorsList = state.colorsList.where((color) => color.id != event.colorId).toList();
+    //   emit(state.copyWith(colorsList: updatedColorsList));
+    // });
+
+
+    on<OnColorDeleted>((event, emit) {
+      final updatedColorsList = state.colorDesignModel.where((color) => color != color).toList();
+      emit(state.copyWith(updatedColorsList));
+    });
+
     add(OnLoadAtStart());
   }
 
+  Future<Database> _initDatabase() async {
+    final databasesPath = await getDatabasesPath();
+    final path = join(databasesPath, 'color_design_app.db');
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+        CREATE TABLE colors(
+          id INTEGER PRIMARY KEY AUTOINCREMENT,
+          colorName TEXT,
+          colorNotes TEXT,
+          red REAL,
+          green REAL,
+          blue REAL,
+          opacity REAL
+        )
+        ''');
+      },
+    );
+  }
+
   Future<List<ColorDesignModel>> loadColorsFromSharedPreferences() async {
-    final prefs = await SharedPreferences.getInstance();
-    final colorsJson = prefs.getString('colors');
-    if (colorsJson != null) {
-      final colorsMapList =
-          (jsonDecode(colorsJson) as List<dynamic>).map((colorMap) => ColorDesignModel.fromJson(colorMap)).toList();
-      return colorsMapList;
-    } else {
-      return [];
-    }
+    final db = await _initDatabase();
+    final result = await db.query('colors');
+    return List.generate(result.length, (index) => ColorDesignModel.fromJson(result[index]));
   }
 }

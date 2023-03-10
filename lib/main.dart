@@ -1,10 +1,8 @@
-
 import 'package:color_design_app/screens/color_picker_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'application/color_picker_bloc/color_design_bloc.dart';
-
 
 void main() {
   runApp(const MyApp());

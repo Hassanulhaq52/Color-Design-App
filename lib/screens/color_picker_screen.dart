@@ -16,6 +16,7 @@ class ColorPickerScreen extends StatelessWidget {
     return BlocBuilder<ColorDesignBloc, ColorDesignState>(
       builder: (context, state) {
         final ColorDesignBloc colorDesignBloc = context.read<ColorDesignBloc>();
+
         final Color rgbaColor = Color.fromRGBO(
           state.redColorValue.toInt(),
           state.greenColorValue.toInt(),
@@ -51,9 +52,7 @@ class ColorPickerScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const SavedColorsScreen(),
-                      ),
+                      MaterialPageRoute(builder: (context) => const SavedColorsScreen()),
                     );
                   },
                   icon: const Icon(Icons.save, size: 30),
@@ -70,10 +69,7 @@ class ColorPickerScreen extends StatelessWidget {
                   child: Container(
                     width: 180,
                     height: 180,
-                    decoration: BoxDecoration(
-                      color: rgbaColor,
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: BoxDecoration(color: rgbaColor, shape: BoxShape.circle),
                   ),
                 ),
                 const SizedBox(height: 10),

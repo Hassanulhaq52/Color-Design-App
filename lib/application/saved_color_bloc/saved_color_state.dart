@@ -20,4 +20,27 @@ class SavedColorState {
       colorDesignModel: colorDesignModel ?? this.colorDesignModel,
     );
   }
+  List<ColorDesignModel> getColorsList() {
+    return colorDesignModel;
+  }
 }
+
+
+
+// class SavedColorState {
+//   final List<ColorDesignModel> colorsList;
+//
+//   SavedColorState({required this.colorsList});
+//
+//   SavedColorState.initial() : colorsList = [];
+//
+//   SavedColorState copyWith({List<ColorDesignModel>? colorsList}) {
+//     return SavedColorState(
+//       colorsList: colorsList ?? this.colorsList,
+//     );
+//   }
+//
+//   List<ColorDesignModel> getColorsList() {
+//     return colorsList;
+//   }
+// }
