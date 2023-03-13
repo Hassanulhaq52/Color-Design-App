@@ -137,14 +137,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../utils/styles.dart';
 
-class SavedColorsScreen extends StatefulWidget {
+class SavedColorsScreen extends StatelessWidget {
   const SavedColorsScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SavedColorsScreen> createState() => _SavedColorsScreenState();
-}
-
-class _SavedColorsScreenState extends State<SavedColorsScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -177,10 +172,12 @@ class _SavedColorsScreenState extends State<SavedColorsScreen> {
                     colorData.opacity,
                   );
                   return Dismissible(
-                    key: ValueKey(colorData),
-                    // key: const Key('colors'),
+                    // key: ValueKey(colorData),
+                    key: const Key('colors'),
+
                     onDismissed: (direction) {
                       context.read<ColorDesignBloc>().add(OnRemoveColor(index: index));
+                      // context.read<SavedColorBloc>().add(OnColorDeleted(index: index));
                       // // Remove the item from the data source.
                       // setState(() {
                       //   List<ColorDesignModel>.from(state.colorDesignModel).removeAt(index);

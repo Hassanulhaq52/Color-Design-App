@@ -126,7 +126,7 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
           opacity: state.opacityValue,
         );
 
-        final db = await _initDatabase();
+        final db = await database();
         await db.insert('colors', newColorDesign.toJson());
 
         // emit(state.copyWith(
@@ -137,19 +137,26 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
         //   blueColorValue: 0,
         //   opacityValue: 1.0,
         // ));
+
       } else {
         print('Please fill all the fields');
       }
     });
 
     on<OnRemoveColor>((event, emit) async {
-      print('Removing color at index ${event.index}');
-      final db = await _initDatabase();
-      await db.delete(
-        'colors',
-        where: 'id = ?',
-        whereArgs: [event.index],
-      );
+      try {
+        print('Removing color at index ${event.index}');
+        final loadColors = loadColorsFromSqfLite();
+        final db = await database();
+        final delete = await db.delete(
+          'colors',
+          where: 'id = ?',
+          whereArgs: [event.index],
+        );
+        loadColors;
+      } catch (error) {
+        print(error);
+      }
 
       // final colorsList = await loadColorsFromSharedPreferences(db);
       // emit(state.copyWith(colorsList: colorsList));
@@ -157,13 +164,13 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     });
   }
 
-  Future<List<ColorDesignModel>> loadColorsFromSharedPreferences() async {
-    final db = await _initDatabase();
+  Future<List<ColorDesignModel>> loadColorsFromSqfLite() async {
+    final db = await database();
     final result = await db.query('colors');
     return List.generate(result.length, (index) => ColorDesignModel.fromJson(result[index]));
   }
 
-  Future<Database> _initDatabase() async {
+  Future<Database> database() async {
     final databasesPath = await getDatabasesPath();
     final path = join(databasesPath, 'color_design_app.db');
 
@@ -186,10 +193,6 @@ class ColorDesignBloc extends Bloc<ColorDesignEvent, ColorDesignState> {
     );
   }
 }
-
-
-
-
 
 // import 'package:bloc/bloc.dart';
 // import 'package:sqflite/sqflite.dart';
